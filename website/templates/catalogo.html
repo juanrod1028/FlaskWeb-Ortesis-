@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}
+{% endblock %}
+{% block content%}
+<form method="POST">
+    <h1 align="center">Catalogo</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Nombre Producto</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Imagen</th>
+                <th scope="col">Categoria</th>
+                <th scope="col">Precio</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for i in range(0,cantidad)%}
+            <tr>
+                {%for nombre in nombres[i]%}
+
+                <th id="nombre">{{nombre}}</th>
+                {%endfor%}
+                {%for Descripcion in descripciones[i]%}
+                <td id="descripcion">{{Descripcion}}</td>
+                {%endfor%}
+                {%for imagen in imagenes[i]%}
+                <td id="imagen"><img src={{imagen}} width="200" height="200"></td>
+                {%endfor%}
+                {%for categoria in categorias[i]%}
+                <td id="categoria">{{categoria}}</td>
+
+                {%endfor%}
+                {%for precio in precios[i]%}
+                <td id="precio">{{precio}}</td>
+
+                {%endfor%}
+                {%for precio in precios[i]%}
+                <td><button type="submit" class="btn btn-primary" id="agregar">Agregar a Carrito</button></td>
+
+                {%endfor%}
+
+            </tr>
+            {%endfor%}
+
+        </tbody>
+    </table>
+</form>
+{% endblock %}

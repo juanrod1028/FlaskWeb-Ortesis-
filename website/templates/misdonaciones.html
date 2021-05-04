@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Mis Donaciones{% endblock %}
+{% block content%}
+<h1 align="center">Mis Donaciones</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nombre Producto</th>
+      <th scope="col">Descripcion</th>
+      <th scope="col">Imagen</th>
+      <th scope="col">Categoria</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for i in range(0,cantidad)%}
+  <tr>
+    {%for nombre in nombres[i]%}
+      <th>{{nombre}}</th>      
+    {%endfor%}
+
+    {%for Descripcion in descripciones[i]%}
+      <td>{{Descripcion}}</td>     
+    {%endfor%} 
+
+    {%for imagen in imagenes[i]%}
+      <td><img src={{imagen}} width="200" height="200"></td>  
+    {%endfor%}
+
+    {%for categoria in categorias[i]%}
+      <td>{{categoria}}</td>
+    {%endfor%}
+  
+  </tr>
+  {%endfor%}
+    
+  </tbody>
+</table>
+{% endblock %}
