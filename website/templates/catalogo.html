@@ -19,15 +19,17 @@
             {%for i in range(0,cantidad)%}
             <tr>
                 {%for nombre in nombres[i]%}
-
                 <th id="nombre">{{nombre}}</th>
                 {%endfor%}
+
                 {%for Descripcion in descripciones[i]%}
                 <td id="descripcion">{{Descripcion}}</td>
                 {%endfor%}
+
                 {%for imagen in imagenes[i]%}
                 <td id="imagen"><img src={{imagen}} width="200" height="200"></td>
                 {%endfor%}
+                
                 {%for categoria in categorias[i]%}
                 <td id="categoria">{{categoria}}</td>
 

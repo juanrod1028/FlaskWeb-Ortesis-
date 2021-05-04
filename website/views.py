@@ -82,6 +82,7 @@ def misdonaciones():
 @views.route('/catalogo', methods=['GET', 'POST'])
 def catalogo():
     if request.method == 'GET':
+        id = db.session.query(Producto.id)
         nombres=db.session.query(Producto.nombre)
         descripciones=db.session.query(Producto.descripcion)
         imagenes=db.session.query(Producto.imagen)
@@ -93,12 +94,9 @@ def catalogo():
     
 
     if request.method == 'POST':
-        nombre = request.form.get('nombre')
-        descripcione = request.form.get('descripcion')
-        imagen = request.form.get('imagen')
-        categoria = request.form.get('categoria')
-        precio = request.form.get('precio')
 
+        id = db.session.query(Producto.nombre)
+        print(id)
         return redirect(url_for('views.carrito'))
 
         
@@ -106,6 +104,8 @@ def catalogo():
 
 @views.route('/carrito', methods=['GET', 'POST'])
 def carrito():
+    
+
     
 
     return render_template("carrito.html",user=current_user)
