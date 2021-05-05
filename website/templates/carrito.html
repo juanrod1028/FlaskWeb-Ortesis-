@@ -1,26 +1,25 @@
 {% extends "base.html" %}
+{% block title %}Carrito{% endblock %} 
 {% block content%}
+<h1 align="center">Notes</h1>
+<ul class="list-group list-group-flush" id="notes">
+  {% for producto in productos %}
+  <li class="list-group-item">
 
-    <h1 align="center">Carrito</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Nombre Producto</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Imagen</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Precio</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-       
-        <tbody>
-            <tr>
-                <th id="nombre">{{id}}</th>
-            </tr>
-    
+    {{ producto.nombre }}
+    {{ producto.precio }}
 
-        </tbody>
-    </table>
-
+    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </li>
+  {% endfor %}
+</ul>
+<form method="POST">
+  <textarea name="note" id="note" class="form-control"></textarea>
+  <br />
+  <div align="center">
+    <button type="submit" class="btn btn-primary">Add Note</button>
+  </div>
+</form>
 {% endblock %}

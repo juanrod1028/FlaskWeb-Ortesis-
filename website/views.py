@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
-from .models import User, Producto, MiProducto
+from .models import User, Producto, MiProducto, Carrito
 from .models import Note
 from . import db
 import json
@@ -104,8 +104,7 @@ def catalogo():
 
 @views.route('/carrito', methods=['GET', 'POST'])
 def carrito():
-    
-
-    
-
-    return render_template("carrito.html",user=current_user)
+    if request.method == 'GET':
+        productos = db.session.query(Carrito.id)
+        print(productos)
+    return render_template("carrito.html",user=current_user, productos = productos)

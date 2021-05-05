@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(150))
     notes = db.relationship('Note')
     productos = db.relationship('Producto')
-    carrito = db.relationship('Carrito')
+    carrito_id = db.Column(db.Integer, db.ForeignKey('carrito.id'))    
 
 class Producto(db.Model):
     id = db.Column(db.Integer, primary_key=True, auto_increment=True)
@@ -27,7 +27,8 @@ class Producto(db.Model):
     imagen = db.Column(db.String(255))
     categoria = db.Column(db.String(255), default=0)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    carrito = db.relationship('Carrito')
+    carrito_id = db.Column(db.Integer, db.ForeignKey('carrito.id'))
+    
     
 
 class MiProducto(db.Model):
@@ -41,5 +42,5 @@ class MiProducto(db.Model):
 
 class Carrito(db.Model):
     id = db.Column(db.Integer, primary_key=True, auto_increment=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    producto_id = db.Column(db.Integer, db.ForeignKey('producto.id'))
+    productos = db.relationship('Producto')
+    usuarios = db.relationship('User')
