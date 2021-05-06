@@ -1,0 +1,48 @@
+<style>
+    .modal-content {
+      background-color: white
+    }
+  </style>
+  
+ 
+  
+  
+  <!-- Purchase Confirm -->
+  <div class="modal fade" id="Modal-PurchaseConfirm-{{ producto.id }}"
+       tabindex="-1"
+       aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ModalLabel">
+            <!-- -->
+            {{ producto.nombre}}
+          </h5>
+          <button type="button" class="close"
+                  data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      <div class="modal-body">
+        <form method="POST">
+          {{ comprarproducto.hidden_tag() }}
+          <h4 class="text-center">
+            Estas seguro que quieres comprar{{ producto.nombre }} por {{ producto.precio }}$ ?
+          </h4>
+          <br>
+          <h6 class="text-center">
+            si presionas comprar este item comprara
+          </h6>
+          <br>
+          <input id="comprarproducto" name="comprarproducto" type="hidden" value="{{producto.id}}">
+          {{ comprarproducto.submit(class="btn btn-outline-success btn-block") }}
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary"
+                data-dismiss="modal">Close
+        </button>
+        </div>
+      </div>
+    </div>
+  </div>

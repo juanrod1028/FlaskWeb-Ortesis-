@@ -2,51 +2,45 @@
 {% block title %}
 {% endblock %}
 {% block content%}
-<form method="POST">
-    <h1 align="center">Catalogo</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="col">Nombre Producto</th>
-                <th scope="col">Descripcion</th>
-                <th scope="col">Imagen</th>
-                <th scope="col">Categoria</th>
-                <th scope="col">Precio</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            {%for i in range(0,cantidad)%}
-            <tr>
-                {%for nombre in nombres[i]%}
-                <th id="nombre">{{nombre}}</th>
-                {%endfor%}
 
-                {%for Descripcion in descripciones[i]%}
-                <td id="descripcion">{{Descripcion}}</td>
-                {%endfor%}
 
-                {%for imagen in imagenes[i]%}
-                <td id="imagen"><img src={{imagen}} width="200" height="200"></td>
+
+<div class="row">
+    <div class="col-8">
+        <h1>Catalogo</h1>
+          
+        <table class="table table-hover table-dark">
+            <thead>
+                <tr>
+                    <th scope="col-8">Nombre</th>
+                    <th scope="col-8">Descripcion</th>
+                    <th scope="col-8">Imagen</th>
+                    <th scope="col-8">Categoria</th>
+                    <th scope="col-8">Precio</th>
+                    <th scope="col-8"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for producto in productos%}
+                {%include 'items_modals.html'%}
+                <tr>
+                    
+                    <th>{{producto.nombre}}</th>
+                    <td>{{producto.descripcion}}</td>
+                    <td id="imagen"><img src={{producto.imagen}} width="200" height="200"></td>
+                    <td id="categoria">{{producto.categoria}}</td>
+                    <td id="precio">{{producto.precio}}</td>
+                    <td><button type="submit" class="btn btn-primary" id="agregar" data-toggle="modal"
+                            data-target="#Modal-PurchaseConfirm-{{ producto.id }}">Comprar</button></td>
+                </tr>
                 {%endfor%}
                 
-                {%for categoria in categorias[i]%}
-                <td id="categoria">{{categoria}}</td>
-
-                {%endfor%}
-                {%for precio in precios[i]%}
-                <td id="precio">{{precio}}</td>
-
-                {%endfor%}
-                {%for precio in precios[i]%}
-                <td><button type="submit" class="btn btn-primary" id="agregar">Agregar a Carrito</button></td>
-
-                {%endfor%}
-
-            </tr>
-            {%endfor%}
-
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-4">
+        <h2>Carrito</h2>
+    </div>
+</div>
 </form>
 {% endblock %}
