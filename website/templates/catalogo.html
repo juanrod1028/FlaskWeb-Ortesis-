@@ -8,7 +8,7 @@
 <div class="row">
     <div class="col-8">
         <h1>Catalogo</h1>
-          
+
         <table class="table table-hover table-dark">
             <thead>
                 <tr>
@@ -24,7 +24,7 @@
                 {%for producto in productos%}
                 {%include 'items_modals.html'%}
                 <tr>
-                    
+
                     <th>{{producto.nombre}}</th>
                     <td>{{producto.descripcion}}</td>
                     <td id="imagen"><img src={{producto.imagen}} width="200" height="200"></td>
@@ -34,12 +34,38 @@
                             data-target="#Modal-PurchaseConfirm-{{ producto.id }}">Comprar</button></td>
                 </tr>
                 {%endfor%}
-                
+
             </tbody>
         </table>
     </div>
     <div class="col-4">
-        <h2>Carrito</h2>
+        <h2>Sus productos comprados</h2>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-hover table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col-8">Nombre</th>
+                            <th scope="col-8">Descripcion</th>
+                            <th scope="col-8">Imagen</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for miproducto in misproductos%}
+                        <tr>
+
+                            <th>{{miproducto.nombre}}</th>
+                            <td>{{miproducto.descripcion}}</td>
+                            <td id="imagen"><img src={{miproducto.imagen}} width="200" height="200"></td>
+
+
+
+                        </tr>
+            </div>
+            {%endfor%}
+        </div>
     </div>
 </div>
 </form>

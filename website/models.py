@@ -9,7 +9,6 @@ class Note(db.Model):
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True)
@@ -28,10 +27,6 @@ class Producto(db.Model):
     categoria = db.Column(db.String(255), default=0)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
    
-    
-    
-    
-
 class MiProducto(db.Model):
     id = db.Column(db.Integer, primary_key=True, auto_increment=True)
     nombre = db.Column(db.String(100), nullable=False)

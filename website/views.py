@@ -60,7 +60,7 @@ def donaciones():
             precio = 3000
         elif categoria == "4":
             precio = 4000
-
+        
         new_producto = Producto(
             nombre=nombre,
             imagen=imagen,
@@ -79,6 +79,7 @@ def donaciones():
             user_id=user_id
             
         )
+       
         db.session.add(new_producto)
         db.session.add(new_miproducto)
         db.session.commit()
@@ -128,15 +129,17 @@ def catalogo():
        
         if(request.method=="POST"):   
            
-           itemcomprado=request.form.get('comprarproducto')
-           productocomprar=Producto.query.filter_by(id=itemcomprado).first()
-           if productocomprar:         
-              productocomprar.user_id=current_user.id
-              flash("Todos los productos", category="success")
-              db.session.commit()
-           
-        productos= Producto.query.filter_by(user_id=None)     
-        return render_template("catalogo.html", user=current_user, productos=productos,comprarproducto=comprarproducto)
+            itemcomprado=request.form.get('comprarproducto')
+            productocomprar=Producto.query.filter_by(id=itemcomprado).first()
+            if productocomprar:         
+                productocomprar.user_id=current_user.id
+                db.session.commit()
+                flash("Producto fue Comprado {productocomprar.nombre} con precio  {productocomprar.precio}  ", category="success")
+            return redirect(url_for('views.catalogo'))
+        if(request.method=="GET"):      
+            productos= Producto.query.filter_by(user_id=None)  
+            misproductos=Producto.query.filter_by(user_id=current_user.id)   
+            return render_template("catalogo.html", user=current_user, productos=productos,comprarproducto=comprarproducto,misproductos=misproductos)
          
 
 class ComprarProducto(FlaskForm):
