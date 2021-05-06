@@ -45,41 +45,73 @@ def delete_note():
 
 @views.route("/donaciones", methods=["GET", "POST"])
 def donaciones():
+    
     if request.method == "POST":
 
+        vdonacion= db.session.query(MiProducto.vDonacion)
         nombre = request.form.get("nombre")
         imagen = request.form.get("imagen")
         descripcion = request.form.get("descripcion")
         categoria = request.form.get("categoria")
         user_id = current_user.id
+
         if categoria == "1":
             precio = 1000
+            vdonacion = 500
         elif categoria == "2":
             precio = 2000
+            vdonacion  = 1000 
         elif categoria == "3":
             precio = 3000
+            vdonacion  = 1500 
         elif categoria == "4":
             precio = 4000
-        
+            vdonacion  = 2000 
+
+
+
+        if len(nombre) == 0:
+            flash('nombre must be greater than 1 character.', category='error')
+        elif len(imagen) ==0:
+            flash('imagen name must be greater than 1 character.', category='error')
+        elif len(descripcion) ==0:
+            flash('descripcion name must be greater than 1 character.', category='error')
+        elif len(categoria) ==0:
+            flash('categoria name must be greater than 1 character.', category='error')
+        if len(nombre) == 0:
+            flash('nombre must be greater than 1 character.', category='error')
+        elif len(imagen) ==0:
+            flash('imagen name must be greater than 1 character.', category='error')
+        elif len(descripcion) ==0:
+            flash('descripcion name must be greater than 1 character.', category='error')
+        elif len(precio) ==0:
+            flash('precio name must be greater than 1 character.', category='error')
+
+            
         new_producto = Producto(
             nombre=nombre,
             imagen=imagen,
             descripcion=descripcion,
             categoria=categoria,
-            precio=precio
-            
-            
+            precio=precio 
         )
+
         new_miproducto = MiProducto(
             nombre=nombre,
             imagen=imagen,
             descripcion=descripcion,
             categoria=categoria,
             precio=precio,
-            user_id=user_id
+            user_id=user_id,
+            vDonacion=vdonacion 
             
         )
-       
+
+        
+        
+        
+        
+        current_user.budget+=vdonacion
         db.session.add(new_producto)
         db.session.add(new_miproducto)
         db.session.commit()
@@ -131,13 +163,20 @@ def catalogo():
            
             itemcomprado=request.form.get('comprarproducto')
             productocomprar=Producto.query.filter_by(id=itemcomprado).first()
-            if productocomprar:         
-                productocomprar.user_id=current_user.id
-                db.session.commit()
-                flash("Producto fue Comprado {productocomprar.nombre} con precio  {productocomprar.precio}  ", category="success")
+
+            if productocomprar: 
+                if current_user.can_purchase(productocomprar):        
+                    productocomprar.user_id=current_user.id
+                    current_user.budget-= productocomprar.precio
+                    db.session.commit()
+                    flash("Producto fue Comprado ", category="success")
+                else:
+                    flash("Tu saldo no es suficiente para comprar este producto", category="error")
             return redirect(url_for('views.catalogo'))
+
         if(request.method=="GET"):      
             productos= Producto.query.filter_by(user_id=None)  
+            
             misproductos=Producto.query.filter_by(user_id=current_user.id)   
             return render_template("catalogo.html", user=current_user, productos=productos,comprarproducto=comprarproducto,misproductos=misproductos)
          

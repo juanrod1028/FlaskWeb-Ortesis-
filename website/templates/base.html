@@ -25,6 +25,18 @@
         <a class="nav-item nav-link" id="Misdonaciones" href="/misdonaciones">Misdonaciones</a>
         <a class="nav-item nav-link" id="catalogo" href="/catalogo">Catalogo</a>
         <a class="nav-item  nav-link" id="logout" href="/logout">Logout</a>
+        <li class="nav-item">
+          <a class="nav-link" style="color: lawngreen; font-weight: bold">
+              <i class="fas fa-coins"></i>
+              Saldo: {{ current_user.prettier_budget }}
+          </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" style="color: rgb(255, 255, 255); font-weight: bold">
+            <i class="fas fa-coins"></i>
+            Hola {{current_user.first_name}}
+        </a>
+    </li>
 
         {% else %}
         <a class="nav-item nav-link" id="login" href="/login">Login</a>

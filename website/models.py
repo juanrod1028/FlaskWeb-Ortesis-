@@ -16,7 +16,19 @@ class User(db.Model, UserMixin):
     first_name = db.Column(db.String(150))
     notes = db.relationship('Note')
     productos = db.relationship('Producto')
+    budget = db.Column(db.Integer(), nullable=False, default=0)
     #carrito_id = db.Column(db.Integer, db.ForeignKey('carrito.id'))    
+
+    @property
+    def prettier_budget(self):
+        if len(str(self.budget)) >= 4:
+            return f'{str(self.budget)[:-3]},{str(self.budget)[-3:]}$'
+        else:
+            return f"{self.budget}$"
+
+    def can_purchase(self, item_obj):
+        return self.budget >= item_obj.precio
+    
 
 class Producto(db.Model):
     id = db.Column(db.Integer, primary_key=True, auto_increment=True)
@@ -26,6 +38,17 @@ class Producto(db.Model):
     imagen = db.Column(db.String(255))
     categoria = db.Column(db.String(255), default=0)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    vDonacion = db.Column(db.Integer)
+
+    def buy(self, user):
+        self.user = user.id
+        user.budget -= self.precio
+        db.session.commit()
+        
+    def donar(self, user):
+        self.user = user.id
+        user.budget += self.precio
+        db.session.commit()
    
 class MiProducto(db.Model):
     id = db.Column(db.Integer, primary_key=True, auto_increment=True)
@@ -35,7 +58,7 @@ class MiProducto(db.Model):
     imagen = db.Column(db.String(255))
     categoria = db.Column(db.String(255), default=0)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    vDonacion = db.Column(db.Integer)
 
 class Carrito(db.Model):
     id = db.Column(db.Integer, primary_key=True, auto_increment=True)
-   
