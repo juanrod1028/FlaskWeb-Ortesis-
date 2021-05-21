@@ -1,23 +1,73 @@
 {% extends "base.html" %} 
 {% block title %}Home{% endblock %} 
 {% block content%}
-<h1 align="center">Notes</h1>
-<ul class="list-group list-group-flush" id="notes">
-  {% for note in user.notes %}
-  <li class="list-group-item">
 
-    {{ note.data}}
-    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </li>
-  {% endfor %}
-</ul>
-<form method="POST">
-  <textarea name="note" id="note" class="form-control"></textarea>
-  <br />
-  <div align="center">
-    <button type="submit" class="btn btn-primary">Add Note</button>
+  
+  <img src="https://i.ibb.co/hRsmPjb/El-Baul-Medico-1.png" class="img-fluid" alt="...">
+  <div class="row">
+    <div class="col">
+      
+    </div>
+    <div class="col">
+      <br>
+      <h2>¿Quiénes Somos?</h2>
+    </div>
+    <div class="col">
+      
+    </div>
+    <h5>La empresa "El baúl médico" nace como una idea de proyecto de la Universidad Sergio Arboleda, la cual se dedica 
+      al intercambio de diferentes productos ortopédicos a través de nuestra pagina web.
+      <br>
+      <br>
+      La razón principal de la empresa es brindar vida útil a cada uno de los instrumentos ortopédicos que poseemos en casa 
+      y no logramos dimensionar su potencial debido a su estado, entendiendose como la renovación y mantenimiento de los mismos por unos de mejor estado.
+    </h5>
+  </div> 
+  <div class="row">
+    <div class="col">
+      
+    </div>
+    <div class="col">
+      <br>
+      <h2>Como funciona</h2>
+    </div>
+    <div class="col">
+      
+    </div>
+    <h5>Para tener una interaccion de tus productos deberas dirigirte al menu de la parte superior izquierda a la pestaña "Donaciones", llenando los 
+      diferentes campos del formulario para especificar el prdoducto que deseas donar y los puntos que te seran otorgados.
+      <br>
+      <br>
+      Para canjear los puntos que posees deberas dirigirte a la pestaña "Catalogo", En donde encontraras diferentes productos productos ortopédicos 
+      que puedes obtener y su valor.
+      <br>
+      <br>
+    </h5>
   </div>
-</form>
+  <img src="https://i.ibb.co/9h167tf/Como-Donar-y-comprar.png" class="img-fluid" alt="...">
+  <br>
+  <br>
+  <img src="https://i.ibb.co/XjXY7cy/Rodilleras.png" class="img-fluid" alt="...">
+  <div class="row">
+    <br>
+    <br>
+    <div class="col">
+      
+    </div>
+    <div class="col">
+      
+      <br>
+      <h2 class="title" >Contactanos</h2>
+      <br>
+        <h4>Teléfono:  +57 3208539685</h4>
+        <h4>Correo:  elbaul@hotmail.com</h4>
+        <h4>facebook:  @elbaulmedico </h4>
+        <h4>Instagram:  @tubaulmedico</h4> 
+        <h4>Twitter:  @tubaulmedico</h4> 
+      
+    </div>
+    <div class="col">
+    
+    </div>
+  </div>
 {% endblock %}

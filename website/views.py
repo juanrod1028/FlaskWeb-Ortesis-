@@ -76,46 +76,30 @@ def donaciones():
             flash('imagen name must be greater than 1 character.', category='error')
         elif len(descripcion) ==0:
             flash('descripcion name must be greater than 1 character.', category='error')
-        elif len(categoria) ==0:
-            flash('categoria name must be greater than 1 character.', category='error')
-        if len(nombre) == 0:
-            flash('nombre must be greater than 1 character.', category='error')
-        elif len(imagen) ==0:
-            flash('imagen name must be greater than 1 character.', category='error')
-        elif len(descripcion) ==0:
-            flash('descripcion name must be greater than 1 character.', category='error')
-        elif len(precio) ==0:
-            flash('precio name must be greater than 1 character.', category='error')
-
-            
-        new_producto = Producto(
-            nombre=nombre,
-            imagen=imagen,
-            descripcion=descripcion,
-            categoria=categoria,
-            precio=precio 
-        )
-
-        new_miproducto = MiProducto(
-            nombre=nombre,
-            imagen=imagen,
-            descripcion=descripcion,
-            categoria=categoria,
-            precio=precio,
-            user_id=user_id,
-            vDonacion=vdonacion 
-            
-        )
-
-        
-        
-        
-        
-        current_user.budget+=vdonacion
-        db.session.add(new_producto)
-        db.session.add(new_miproducto)
-        db.session.commit()
-        flash("Producto creado!", category="success")
+        elif len(categoria) ==21:
+            flash('Select Category', category='error')
+        else:
+            new_producto = Producto(
+                nombre=nombre,
+                imagen=imagen,
+                descripcion=descripcion,
+                categoria=categoria,
+                precio=precio 
+            )
+            new_miproducto = MiProducto(
+                nombre=nombre,
+                imagen=imagen,
+                descripcion=descripcion,
+                categoria=categoria,
+                precio=precio,
+                user_id=user_id,
+                vDonacion=vdonacion    
+            )
+            current_user.budget+=vdonacion
+            db.session.add(new_producto)
+            db.session.add(new_miproducto)
+            db.session.commit()
+            flash("Donacion Realizada!", category="success")
 
     return render_template("donaciones.html", user=current_user)
 
